@@ -2,6 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { ProjectListClient } from "@/components/ProjectListClient";
 import { serialize } from "@/lib/serialize";
 
+// Veritabanına istek anında bağlan (build sırasında prerender etme)
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const projects = await prisma.project.findMany({
     orderBy: { createdAt: "desc" },
