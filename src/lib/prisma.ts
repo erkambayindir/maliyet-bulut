@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
 function createPrismaClient() {
   // Vercel/Neon ortamında WebSocket tabanlı adapter kullan
