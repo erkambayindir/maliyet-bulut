@@ -4,6 +4,11 @@
 
 ---
 
+## 2026-06-18 — Birim Fiyatlar (kütüphane) sayfası eklendi
+- `/birim-fiyatlar` OSKA kütüphane ekranı: sol kurum ağacı (ÇŞB veri var, diğer kurumlar görsel/pasif), sağda "Pozlar" tablosu (Poz No / Tanımı / Birimi / Birim Fiyatı + yıl seçici / Kitap Adı / Fasikül Adı), kırmızı arama ikonu, sayfalama (toplam öğe sayısı tr-TR).
+- Mevcut `/api/poz-library` endpoint'i yeniden kullanıldı (q, institution, year, fascicle, page).
+- Placeholder'dan gerçek sayfaya dönüştürüldü.
+
 ## 2026-06-18 — Kullanıcı İşlemleri (audit log) eklendi
 - Prisma'ya `ActivityLog` modeli eklendi (denormalize: projectName, workGroupName, pozNo, action, userName, createdAt). Migration `add_activity_log` yerel + Neon'a uygulandı (Neon compute psql ile uyandırıldıktan sonra).
 - `src/lib/activity.ts` — `logActivity()` yardımcısı (hata olsa ana işlemi bozmaz, kullanıcı şimdilik sabit erkam.bayindir@gmail.com).

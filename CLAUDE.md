@@ -82,6 +82,6 @@ Aylık güncellenir. Kaynak: ÇŞB Yüksek Fen Kurulu PDF'leri (`yfk.csb.gov.tr`
 - Analizler (alt bileşen kırılımı)
 - İş Grupları yönetim ekranı (ekle/sil/düzenle UI)
 - Projenin Bilgileri ekranı
-- Üst menü içerikleri (Benim Kitaplarım, Birim Fiyatlar, Yardım, Satın Al) — şu an `YakindaPage` placeholder (Akıllı Panel + Kullanıcı İşlemleri TAMAMLANDI)
+- Üst menü içerikleri (Benim Kitaplarım, Yardım, Satın Al) — şu an `YakindaPage` placeholder (Akıllı Panel + Kullanıcı İşlemleri + Birim Fiyatlar TAMAMLANDI)
 - Ana sayfa Arşiv / Çöp Kutusu işlevleri (buton var, işlev yok)
 - Kimlik doğrulama / çok kullanıcılı yapı
