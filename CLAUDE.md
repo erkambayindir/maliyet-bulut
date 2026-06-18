@@ -71,6 +71,8 @@ Aylık güncellenir. Kaynak: ÇŞB Yüksek Fen Kurulu PDF'leri (`yfk.csb.gov.tr`
 - Excel & Word export (A4, KİK formatı)
 - ÇŞB PDF'lerinden otomatik poz import
 - Vercel + Neon canlı deploy
+- Ana sayfa OSKA tarzı üst menü (TopNav) + tablo görünümü
+- Akıllı Panel (dashboard): `/api/stats` + recharts ile 5 widget (en sık/en pahalı/en çok miktar poz, en yüksek YM proje, bu yıl dosyaları)
 
 ## Henüz Yapılmadı
 
@@ -79,6 +81,6 @@ Aylık güncellenir. Kaynak: ÇŞB Yüksek Fen Kurulu PDF'leri (`yfk.csb.gov.tr`
 - Analizler (alt bileşen kırılımı)
 - İş Grupları yönetim ekranı (ekle/sil/düzenle UI)
 - Projenin Bilgileri ekranı
-- Üst menü içerikleri (Benim Kitaplarım, Akıllı Panel, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al) — şu an `YakindaPage` placeholder
+- Üst menü içerikleri (Benim Kitaplarım, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al) — şu an `YakindaPage` placeholder (Akıllı Panel TAMAMLANDI)
 - Ana sayfa Arşiv / Çöp Kutusu işlevleri (buton var, işlev yok)
 - Kimlik doğrulama / çok kullanıcılı yapı

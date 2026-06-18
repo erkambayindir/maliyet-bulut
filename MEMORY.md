@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-06-18 — Akıllı Panel (dashboard) eklendi
+- `recharts` kuruldu.
+- `/api/stats` endpoint'i: tüm ProjectPoz'ları çekip JS'de agregasyon yapar — poz kullanım sıklığı, parasal tutar, miktar; proje bazlı YM toplamı; bu yıl hazırlanan projeler.
+- `AkilliPanelClient.tsx`: OSKA tarzı 5 widget (başlık + kırmızı çizgi + ikonlar):
+  1. YM'de En Sık Kullanılan 10 Poz (bar)
+  2. Parasal Tutarı En Yüksek 10 Poz (bar)
+  3. En Çok Miktarda Kullanılan 10 Poz (bar)
+  4. YM Değeri En Yüksek 10 Proje (tablo)
+  5. Bu Yıl İçerisinde Hazırlanmış YM Dosyaları (tablo)
+- `/akilli-panel` placeholder'dan gerçek panele dönüştürüldü.
+- DESIGN.md'ye chart rengi (`chartBar #3b9fd1`) ve widget kart bileşeni eklendi.
+
+## 2026-06-18 — PostgreSQL Windows servisi
+- pg_ctl register ile PostgreSQL "Automatic" Windows servisi yapıldı (açılışta otomatik başlar). Kod değişikliği yok.
+
 ## 2026-06-18 — OSKA tarzı üst menü (TopNav) + ana sayfa yeniden tasarım
 - `src/components/layout/TopNav.tsx` eklendi: beyaz çubuk, MALİYETBULUT logo, yatay menü (Projeler, Benim Kitaplarım, Akıllı Panel, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al), sağda kullanıcı + kredi ikonu, altta teal çizgi. `usePathname` ile aktif öğe vurgusu.
 - Henüz yapılmamış 6 menü için `YakindaPage` bileşeni + placeholder route'lar (benim-kitaplarim, akilli-panel, kullanici-islemleri, birim-fiyatlar, yardim, satin-al).

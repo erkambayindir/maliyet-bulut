@@ -19,6 +19,8 @@ colors:
   excelGreen:     "#16a34a"   # green-600, Excel indirme butonu
   wordBlue:       "#2563eb"   # blue-600, Word indirme butonu
   danger:         "#dc2626"   # red-600, silme
+  chartBar:       "#3b9fd1"   # Akıllı Panel bar grafik rengi
+  widgetAccent:   "#ef4444"   # red-500, widget başlık altı vurgu çizgisi
   # Nötrler
   surface:        "#ffffff"   # Kart/tablo arka planı
   surfaceAlt:     "#f5f5f5"   # Zebra satır, başlık şeridi
@@ -143,6 +145,7 @@ MaliyetBulut, kamu ihale mühendislerinin günlerce kullandığı bir **üretken
 - **Modal:** beyaz, `rounded-xl`, `black/50` overlay + blur, ESC ile kapanır.
 - **TopNav:** beyaz çubuk, 2px alt teal çizgi, yatay menü; aktif öğe teal & kalın, pasif gri. Sağda kullanıcı adı + ikon. Sticky.
 - **CTA daire buton:** turuncu dolu daire + yanında etiket; ana sayfada Yeni Proje / Arşiv / Çöp Kutusu için.
+- **Dashboard widget:** beyaz kart, başlık satırı altında 2px kırmızı vurgu çizgisi, sağda chevron/genişlet/kapat ikonları, gövdede bar grafik veya tablo (Akıllı Panel).
 
 ## Do's and Don'ts
 
