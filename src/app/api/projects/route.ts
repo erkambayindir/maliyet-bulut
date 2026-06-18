@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { getCurrentUser } from "@/lib/auth";
 
 const createSchema = z.object({
   name: z.string().min(1),
@@ -9,7 +10,11 @@ const createSchema = z.object({
 });
 
 export async function GET() {
+  const user = await getCurrentUser();
+  if (!user) return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
+
   const projects = await prisma.project.findMany({
+    where: user.role === "ADMIN" ? {} : { ownerId: user.id },
     orderBy: { createdAt: "desc" },
     select: {
       id: true,
@@ -23,6 +28,9 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const user = await getCurrentUser();
+  if (!user) return NextResponse.json({ error: "Yetkisiz" }, { status: 401 });
+
   const body = await request.json();
   const data = createSchema.parse(body);
 
@@ -31,6 +39,7 @@ export async function POST(request: Request) {
       name: data.name,
       kdvRate: data.kdvRate ?? 20,
       generalMarkup: data.generalMarkup ?? 25,
+      ownerId: user.id,
       workGroups: {
         create: [
           { name: "İnşaat İmalatları", code: "I", order: 1 },

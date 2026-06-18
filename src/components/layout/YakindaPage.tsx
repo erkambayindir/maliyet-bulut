@@ -1,11 +1,11 @@
-import { TopNav } from "@/components/layout/TopNav";
+import { TopNavServer } from "@/components/layout/TopNavServer";
 import Link from "next/link";
 import { Construction } from "lucide-react";
 
 export function YakindaPage({ title }: { title: string }) {
   return (
     <div className="min-h-screen bg-gray-50">
-      <TopNav userName="Furkan" />
+      <TopNavServer />
       <div className="max-w-4xl mx-auto px-6 py-24 text-center">
         <Construction size={56} className="mx-auto text-teal-600/40 mb-4" />
         <h1 className="text-2xl font-semibold text-gray-800">{title}</h1>

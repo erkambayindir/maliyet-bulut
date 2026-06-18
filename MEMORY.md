@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-06-18 — Kullanıcı sistemi & oturum (auth) eklendi
+- **Karar:** e-posta + şifre (bcrypt + jose JWT, httpOnly çerez). Admin = ADMIN_EMAIL ile kayıt olan (erkam.bayindir@gmail.com).
+- Şema: `User` modeli (email, passwordHash, name, role) + `Project.ownerId`. Migration `add_users_auth` yerel + Neon.
+- `src/lib/auth.ts`: hash/verify, JWT sign/verify, çerez set/clear, getCurrentUser, registerUser (ADMIN_EMAIL→ADMIN), authenticateUser.
+- API: `/api/auth/register|login|logout`.
+- `src/proxy.ts` (Next 16 middleware→proxy konvansiyonu): giriş yoksa /giris'e yönlendirir; girişliyse /giris,/kayit'tan ana sayfaya.
+- Sayfalar: `/giris`, `/kayit` (teal gradient kart).
+- TopNav kullanıcı dropdown menüsü: Hesabım / Kullanıcı Yönetimi (admin) / İş Dosyası Yönetimi / İmza Listesi / Çıkış Yap. `TopNavServer` ile gerçek oturum kullanıcısı geçiriliyor.
+- **Veri izolasyonu:** ana sayfa + /api/projects + proje layout — admin tümünü, kullanıcı yalnızca ownerId===kendisi. Proje oluşturmada ownerId set ediliyor.
+- Admin: `/kullanici-yonetimi` (+ `/api/admin/users`) — kullanıcı listesi + proje/poz/YM değeri istatistikleri, özet kartlar.
+- `/hesabim` (oturum bilgisi), `/is-dosyasi-yonetimi` + `/imza-listesi` placeholder.
+- .env'ye SESSION_SECRET + ADMIN_EMAIL eklendi (Vercel'e de eklenmeli).
+- DESIGN.md'ye auth ekranı + dropdown menü + admin stat kartı eklendi.
+- .env (SESSION_SECRET, ADMIN_EMAIL) ve env değişkenleri Vercel'de tanımlanmalı (deploy notu).
+
 ## 2026-06-18 — Birim Fiyatlar (kütüphane) sayfası eklendi
 - `/birim-fiyatlar` OSKA kütüphane ekranı: sol kurum ağacı (ÇŞB veri var, diğer kurumlar görsel/pasif), sağda "Pozlar" tablosu (Poz No / Tanımı / Birimi / Birim Fiyatı + yıl seçici / Kitap Adı / Fasikül Adı), kırmızı arama ikonu, sayfalama (toplam öğe sayısı tr-TR).
 - Mevcut `/api/poz-library` endpoint'i yeniden kullanıldı (q, institution, year, fascicle, page).
