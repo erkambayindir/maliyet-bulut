@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Modal } from "@/components/ui/Modal";
 import { ProjectSummary } from "@/types";
-import { Plus, FolderOpen, Calendar, Trash2 } from "lucide-react";
+import { Plus, Search, Archive, Trash2 } from "lucide-react";
 
 interface ProjectListClientProps {
   initialProjects: ProjectSummary[];
@@ -19,6 +18,7 @@ export function ProjectListClient({ initialProjects }: ProjectListClientProps) {
   const [newModalOpen, setNewModalOpen] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [creating, setCreating] = useState(false);
+  const [search, setSearch] = useState("");
 
   async function createProject() {
     if (!projectName.trim()) return;
@@ -41,65 +41,99 @@ export function ProjectListClient({ initialProjects }: ProjectListClientProps) {
     setProjects((prev) => prev.filter((p) => p.id !== id));
   }
 
+  const visible = projects.filter((p) =>
+    search ? p.name.toLowerCase().includes(search.toLowerCase()) : true
+  );
+
   return (
     <>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-white font-semibold text-sm uppercase tracking-wider">
-          Projeler ({projects.length})
-        </h2>
-        <Button onClick={() => setNewModalOpen(true)} size="sm">
-          <Plus size={14} /> Yeni Proje
-        </Button>
+      {/* Üst aksiyon çubuğu */}
+      <div className="flex items-center justify-between gap-4 mb-6">
+        <button
+          onClick={() => setNewModalOpen(true)}
+          className="flex items-center gap-3 group"
+        >
+          <span className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-500 hover:bg-orange-600 text-white shadow-md transition-colors">
+            <Plus size={24} />
+          </span>
+          <span className="text-gray-700 font-medium group-hover:text-gray-900">
+            Yeni Proje Oluştur
+          </span>
+        </button>
+
+        <div className="relative w-full max-w-md">
+          <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Proje Ara"
+            className="w-full pl-11 pr-4 py-3 text-sm border border-gray-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
+        </div>
       </div>
 
-      {projects.length === 0 ? (
-        <div className="text-center py-20 text-gray-400">
-          <FolderOpen size={40} className="mx-auto mb-3 opacity-40" />
-          <p className="text-sm">Henüz proje oluşturulmadı.</p>
-          <p className="text-xs mt-1">Yukarıdaki "Yeni Proje" butonu ile başlayın.</p>
-        </div>
-      ) : (
-        <div className="grid gap-3">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="bg-white/10 hover:bg-white/15 border border-white/10 rounded-xl p-5 flex items-center justify-between transition-colors group"
-            >
-              <Link
-                href={`/projeler/${project.id}/ym-cetveli`}
-                className="flex items-center gap-3 flex-1 min-w-0"
-              >
-                <div className="p-2 rounded-lg bg-teal-600/30">
-                  <FolderOpen size={18} className="text-teal-300" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-white font-medium text-sm truncate">{project.name}</p>
-                  <p className="text-gray-400 text-xs flex items-center gap-1 mt-0.5">
-                    <Calendar size={11} />
-                    {new Date(project.calculationDate).toLocaleDateString("tr-TR")}
-                  </p>
-                </div>
-              </Link>
+      {/* Başlık */}
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">Projeler</h2>
 
-              <div className="flex items-center gap-2">
-                <span className={`text-xs px-2 py-0.5 rounded-full font-medium
-                  ${project.status === "ACTIVE"
-                    ? "bg-teal-500/20 text-teal-300"
-                    : "bg-gray-500/20 text-gray-400"}`}>
-                  {project.status === "ACTIVE" ? "Aktif" : project.status}
-                </span>
-                <button
-                  onClick={() => deleteProject(project.id, project.name)}
-                  className="opacity-0 group-hover:opacity-100 p-1.5 text-gray-500 hover:text-red-400 transition-all rounded-md hover:bg-red-500/10"
-                  title="Projeyi Sil"
+      {/* Tablo */}
+      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b-2 border-teal-600 bg-gray-50">
+              <th className="text-left px-6 py-3 font-semibold text-gray-700">Projenin Adı</th>
+              <th className="text-left px-6 py-3 font-semibold text-gray-700 w-64">Hesap Tarihi</th>
+              <th className="w-16" />
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {visible.length === 0 ? (
+              <tr>
+                <td colSpan={3} className="text-center py-12 text-gray-400">
+                  {search ? "Eşleşen proje bulunamadı." : "Henüz proje oluşturulmadı."}
+                </td>
+              </tr>
+            ) : (
+              visible.map((project) => (
+                <tr
+                  key={project.id}
+                  onClick={() => router.push(`/projeler/${project.id}/ym-cetveli`)}
+                  className="hover:bg-teal-50/50 cursor-pointer transition-colors group"
                 >
-                  <Trash2 size={14} />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+                  <td className="px-6 py-3.5 text-gray-800 font-medium">{project.name}</td>
+                  <td className="px-6 py-3.5 text-gray-600">
+                    {new Date(project.calculationDate).toLocaleDateString("tr-TR")}
+                  </td>
+                  <td className="px-6 py-3.5 text-right">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); deleteProject(project.id, project.name); }}
+                      className="opacity-0 group-hover:opacity-100 p-1.5 text-gray-400 hover:text-red-500 transition-all"
+                      title="Sil"
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Alt aksiyonlar */}
+      <div className="flex items-center justify-end gap-6 mt-5">
+        <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+          <span className="flex items-center justify-center w-11 h-11 rounded-full bg-orange-500 hover:bg-orange-600 text-white shadow transition-colors">
+            <Archive size={18} />
+          </span>
+          <span className="text-sm font-medium">Arşiv</span>
+        </button>
+        <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+          <span className="flex items-center justify-center w-11 h-11 rounded-full bg-orange-500 hover:bg-orange-600 text-white shadow transition-colors">
+            <Trash2 size={18} />
+          </span>
+          <span className="text-sm font-medium">Çöp Kutusu</span>
+        </button>
+      </div>
 
       <Modal open={newModalOpen} onClose={() => setNewModalOpen(false)} title="Yeni Proje Oluştur" size="sm">
         <div className="space-y-4">

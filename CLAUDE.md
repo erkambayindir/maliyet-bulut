@@ -32,6 +32,7 @@ Türkiye inşaat sektörü için **yaklaşık maliyet ve metraj hesaplama** plat
 - `prisma/schema.prisma` — 7 model: Project, WorkGroup (self-referencing WBS ağacı), PozLibrary, ProjectPoz, MetrajRow, DemirajRow, AnalysisItem.
 - `src/app/projeler/[projectId]/ym-cetveli/` — Ana ekran: sol İş Grupları paneli + sağ poz tablosu. Inline hücre düzenleme + optimistic update.
 - `src/components/modals/PozEkleModal.tsx` — Kurum/fasikül ağacı + sayfalı poz arama.
+- `src/components/layout/TopNav.tsx` — Ana sayfa üst menü çubuğu (Projeler, Benim Kitaplarım, Akıllı Panel, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al). Çoğu menü `YakindaPage` placeholder'ına gider.
 - `src/app/api/projects/[projectId]/export/route.ts` — Excel export (A4 dikey, dinamik satır yüksekliği).
 - `src/app/api/projects/[projectId]/export-word/route.ts` — Word export (ham OOXML, A4 dikey).
 - `scripts/*.py` — PDF'den poz import scriptleri (pdfplumber + psycopg2).
@@ -78,4 +79,6 @@ Aylık güncellenir. Kaynak: ÇŞB Yüksek Fen Kurulu PDF'leri (`yfk.csb.gov.tr`
 - Analizler (alt bileşen kırılımı)
 - İş Grupları yönetim ekranı (ekle/sil/düzenle UI)
 - Projenin Bilgileri ekranı
+- Üst menü içerikleri (Benim Kitaplarım, Akıllı Panel, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al) — şu an `YakindaPage` placeholder
+- Ana sayfa Arşiv / Çöp Kutusu işlevleri (buton var, işlev yok)
 - Kimlik doğrulama / çok kullanıcılı yapı

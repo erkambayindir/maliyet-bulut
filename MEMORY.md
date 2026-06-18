@@ -4,6 +4,13 @@
 
 ---
 
+## 2026-06-18 — OSKA tarzı üst menü (TopNav) + ana sayfa yeniden tasarım
+- `src/components/layout/TopNav.tsx` eklendi: beyaz çubuk, MALİYETBULUT logo, yatay menü (Projeler, Benim Kitaplarım, Akıllı Panel, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al), sağda kullanıcı + kredi ikonu, altta teal çizgi. `usePathname` ile aktif öğe vurgusu.
+- Henüz yapılmamış 6 menü için `YakindaPage` bileşeni + placeholder route'lar (benim-kitaplarim, akilli-panel, kullanici-islemleri, birim-fiyatlar, yardim, satin-al).
+- Ana sayfa koyu gradient'ten **açık gri temaya** çevrildi, TopNav entegre edildi.
+- `ProjectListClient` OSKA tarzına göre yeniden yazıldı: turuncu "Yeni Proje Oluştur" butonu, "Proje Ara" arama kutusu, tablo görünümü (Projenin Adı / Hesap Tarihi), satıra tıklayınca proje açılır, altta Arşiv / Çöp Kutusu butonları.
+- DESIGN.md'ye turuncu aksiyon rengi (`actionOrange`) ve TopNav bileşeni eklendi.
+
 ## 2026-06-18 — Dokümantasyon dosyaları kuruldu
 - `CLAUDE.md` proje bağlamıyla dolduruldu (teknoloji yığını, mimari, konvansiyonlar, deployment, veri durumu, yapılacaklar).
 - `MEMORY.md` çalışma günlüğü oluşturuldu (bu dosya).

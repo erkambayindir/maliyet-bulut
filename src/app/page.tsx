@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { ProjectListClient } from "@/components/ProjectListClient";
+import { TopNav } from "@/components/layout/TopNav";
 import { serialize } from "@/lib/serialize";
 
 // Veritabanına istek anında bağlan (build sırasında prerender etme)
@@ -12,25 +13,10 @@ export default async function HomePage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f2a2e] to-[#1a4a52]">
-      <header className="px-8 py-5 flex items-center justify-between border-b border-white/10">
-        <div>
-          <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase">
-            MaliyetBulut
-          </span>
-          <p className="text-white text-lg font-semibold mt-0.5">Proje Yönetimi</p>
-        </div>
-        <div className="text-xs text-gray-400">
-          İnşaat Yaklaşık Maliyet Hesaplama Sistemi
-        </div>
-      </header>
-
-      <div className="px-8 py-8 max-w-5xl mx-auto">
-        <ProjectListClient
-          initialProjects={
-            serialize(projects)
-          }
-        />
+    <div className="min-h-screen bg-gray-50">
+      <TopNav userName="Furkan" />
+      <div className="px-8 py-8 max-w-6xl mx-auto">
+        <ProjectListClient initialProjects={serialize(projects)} />
       </div>
     </div>
   );

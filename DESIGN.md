@@ -14,6 +14,8 @@ colors:
   primaryLight:   "#e0f4f6"   # teal-50/light, grup satırı arka planı
   accentTextDark: "#115e59"   # teal-800, açık zeminde grup metni
   # Aksiyon renkleri
+  actionOrange:   "#f97316"   # orange-500, ana sayfa CTA (Yeni Proje, Arşiv, Çöp) — OSKA uyumu
+  actionOrangeHover: "#ea580c" # orange-600
   excelGreen:     "#16a34a"   # green-600, Excel indirme butonu
   wordBlue:       "#2563eb"   # blue-600, Word indirme butonu
   danger:         "#dc2626"   # red-600, silme
@@ -67,6 +69,16 @@ components:
     backgroundHover: "{colors.primaryHover}"
     text: "#ffffff"
     rounded: "{rounded.sm}"
+  topNav:
+    background: "{colors.surface}"
+    borderBottom: "{colors.primary}"   # 2px teal alt çizgi
+    activeText: "{colors.primaryHover}"
+    inactiveText: "{colors.textSecondary}"
+  ctaCircleButton:                      # Ana sayfa turuncu daire butonlar
+    background: "{colors.actionOrange}"
+    backgroundHover: "{colors.actionOrangeHover}"
+    text: "#ffffff"
+    shape: "circle"
   sidebar:
     background: "{colors.brandDarkest}"
     text: "#d1d5db"
@@ -96,6 +108,7 @@ MaliyetBulut, kamu ihale mühendislerinin günlerce kullandığı bir **üretken
 - **Koyu teal ailesi** (`brandDarkest`→`brandTeal`) navigasyon, başlık ve rapor başlıklarında kimliği taşır. Sidebar her zaman en koyu ton (`#0f2a2e`).
 - **Primary teal** (`#0d9488`) etkileşimli her şeyin rengidir: birincil butonlar, aktif menü öğesi, seçili iş grubu, hücre düzenleme kenarlığı.
 - **Aksiyon renkleri** dosya türünü kodlar: Excel **yeşil**, Word **mavi**, silme **kırmızı**. Bu eşleştirme tutarlı kalmalı.
+- **Turuncu** (`actionOrange`) yalnızca ana sayfa CTA daire butonlarında kullanılır (Yeni Proje Oluştur, Arşiv, Çöp Kutusu) — OSKA Bulut ile görsel uyum için. Uygulama içi aksiyonlarda teal kullanılmaya devam edilir.
 - **Nötrler** veri yoğun tabloların okunabilirliği içindir; zebra satırlar `surfaceAlt`, başlık şeridi `surfaceMuted`.
 
 ## Typography
@@ -128,6 +141,8 @@ MaliyetBulut, kamu ihale mühendislerinin günlerce kullandığı bir **üretken
 - **Grup satırı (YM Cetveli):** açık teal zemin, koyu teal kalın metin, büyük harf — poz satırlarından görsel olarak ayrışır.
 - **Tablo başlığı:** `surfaceMuted` zemin, ikincil metin, sticky.
 - **Modal:** beyaz, `rounded-xl`, `black/50` overlay + blur, ESC ile kapanır.
+- **TopNav:** beyaz çubuk, 2px alt teal çizgi, yatay menü; aktif öğe teal & kalın, pasif gri. Sağda kullanıcı adı + ikon. Sticky.
+- **CTA daire buton:** turuncu dolu daire + yanında etiket; ana sayfada Yeni Proje / Arşiv / Çöp Kutusu için.
 
 ## Do's and Don'ts
 
