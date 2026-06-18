@@ -123,6 +123,7 @@ model AnalysisItem {
 // Kullanıcı işlem geçmişi (audit log) — denormalize edilmiş ki kayıt silinse bile log kalır
 model ActivityLog {
   id            String   @id @default(uuid())
+  userId        String?  // işlemi yapan kullanıcı (filtreleme için)
   projectId     String?
   projectName   String
   workGroupName String?
@@ -131,5 +132,6 @@ model ActivityLog {
   userName      String
   createdAt     DateTime @default(now())
 
+  @@index([userId])
   @@index([createdAt])
 }

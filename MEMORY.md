@@ -4,6 +4,13 @@
 
 ---
 
+## 2026-06-18 — İşlem geçmişi kullanıcı izolasyonu
+- Sorun: Kullanıcı İşlemleri her kullanıcıya TÜM logları gösteriyordu; ayrıca `logActivity` sabit admin e-postası yazıyordu (gerçek kullanıcıyı değil).
+- `ActivityLog`'a `userId` eklendi (migration `activity_user_id`, yerel + Neon).
+- `logActivity` artık `getCurrentUser()` ile işlemi YAPAN kullanıcıyı (userId + email) yazar.
+- `/api/activity` filtrelendi: admin tüm loglar, normal kullanıcı yalnızca `userId===kendi`.
+- Eski sahipsiz loglar admin'e backfill edildi (Neon 4, yerel 2).
+
 ## 2026-06-18 — Veri izolasyonu sağlamlaştırma + sahipsiz projeler
 - Sorun: Neon'daki "Hhgg" ve "Demo Konut Projesi" sahipsiz (ownerId=null) kalmıştı (auth öncesi/erken deployment). Sahipsiz projeleri yalnızca admin görüyordu.
 - Her iki proje admin'e (erkam.bayindir@gmail.com) bağlandı (Neon + yerel UPDATE).
