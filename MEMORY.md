@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-06-18 — Diğer kurumların birim fiyatları eklendi (KGM, DSİ, İller Bankası)
+- Resmi kaynaklardan PDF indirilip import edildi (yerel + Neon):
+  - **KGM** (Karayolları) 2026-Ocak / Yapım: 651 poz. Kaynak: kgm.gov.tr. Özel format (poz `KGM/03.542/5`, fiyat boşluk binlik). `scripts/import_kgm.py`.
+  - **DSİ** 2026-Ocak / İnşaat: 1.940 poz. Kaynak: tarimorman CDN. `scripts/import_generic.py`.
+  - **İller Bankası** 2026-Haziran / Altyapı: 2.962 poz. Kaynak: ilbank.gov.tr. `scripts/import_generic.py`.
+- `scripts/import_generic.py` eklendi: standart 4-kolon PDF'leri parametreli içe aktarır, hem nokta hem boşluk binlik ayracını çözer.
+- Birim Fiyatlar sayfası + Poz Ekle modalı kurum ağacı güncellendi: KGM/DSİ/İB artık tıklanabilir (hasData), kurum seçilince yıl otomatik ayarlanıyor (DSİ/KGM=2026-Ocak, ÇŞB/İB=2026-Haziran).
+- DLH/Kültür/MSB/Orman/PTT/TEDAŞ/Vakıflar: ayrı dijital birim fiyat kitabı yayınlamıyor (çoğu ÇŞB'yi referans alır) — görsel placeholder kaldı.
+- Toplam kütüphane: 16.510 poz (ÇŞB 10.957 + İB 2.962 + DSİ 1.940 + KGM 651).
+
 ## 2026-06-18 — İşlem geçmişi kullanıcı izolasyonu
 - Sorun: Kullanıcı İşlemleri her kullanıcıya TÜM logları gösteriyordu; ayrıca `logActivity` sabit admin e-postası yazıyordu (gerçek kullanıcıyı değil).
 - `ActivityLog`'a `userId` eklendi (migration `activity_user_id`, yerel + Neon).

@@ -39,7 +39,7 @@ const INSTITUTION_TREE = [
   {
     name: "İller Bankası",
     short: "İller Bankası",
-    fascicles: ["İnşaat"],
+    fascicles: ["Altyapı"],
   },
 ];
 

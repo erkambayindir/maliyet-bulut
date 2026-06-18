@@ -8,13 +8,13 @@ import { PozLibraryItem } from "@/types";
 const YEARS = ["2026-Haziran", "2026-Mayıs", "2026-Ocak", "2025-Temmuz"];
 const PAGE_SIZE = 50;
 
-// Kurum ağacı — sadece ÇŞB'de veri var, diğerleri görsel (OSKA uyumu)
+// Kurum ağacı — veri olanlar tıklanabilir (hasData), diğerleri görsel
 const INSTITUTIONS = [
-  { name: "Çevre ve Şehircilik Bakanlığı", short: "ÇŞB", fascicles: ["İnşaat", "Mekanik Tesisat", "Elektrik"], hasData: true },
-  { name: "Devlet Su İşleri Genel Müdürlüğü", short: "DSİ", fascicles: ["İnşaat"], hasData: false },
+  { name: "Çevre ve Şehircilik Bakanlığı", short: "ÇŞB", fascicles: ["İnşaat", "Mekanik Tesisat", "Elektrik"], hasData: true, defaultYear: "2026-Haziran" },
+  { name: "Devlet Su İşleri Genel Müdürlüğü", short: "DSİ", fascicles: ["İnşaat"], hasData: true, defaultYear: "2026-Ocak" },
+  { name: "Karayolları Genel Müdürlüğü", short: "KGM", fascicles: ["Yapım"], hasData: true, defaultYear: "2026-Ocak" },
+  { name: "İller Bankası", short: "İller Bankası", fascicles: ["Altyapı"], hasData: true, defaultYear: "2026-Haziran" },
   { name: "Altyapı Yatırımları (DLH)", short: "DLH", fascicles: [], hasData: false },
-  { name: "İller Bankası", short: "İller Bankası", fascicles: ["İnşaat"], hasData: false },
-  { name: "Karayolları Genel Müdürlüğü", short: "KGM", fascicles: ["Yapım"], hasData: false },
   { name: "Kültür Bakanlığı", short: "Kültür", fascicles: [], hasData: false },
   { name: "Milli Savunma Bakanlığı", short: "MSB", fascicles: [], hasData: false },
   { name: "Orman ve Su İşleri Bakanlığı", short: "Orman", fascicles: [], hasData: false },
@@ -88,7 +88,11 @@ export function BirimFiyatlarClient() {
                 <div key={inst.short}>
                   <button
                     onClick={() => {
-                      if (inst.hasData) { setInstitution(inst.short); setFascicle(null); }
+                      if (inst.hasData) {
+                        setInstitution(inst.short);
+                        setFascicle(null);
+                        if (inst.defaultYear) setYear(inst.defaultYear);
+                      }
                       if (inst.fascicles.length) toggle(inst.short);
                     }}
                     className={`w-full flex items-center gap-1.5 px-2.5 py-2 text-xs text-left transition-colors
@@ -103,7 +107,11 @@ export function BirimFiyatlarClient() {
                   {isExpanded && inst.fascicles.map((f) => (
                     <button
                       key={f}
-                      onClick={() => { setInstitution(inst.short); setFascicle(f); }}
+                      onClick={() => {
+                        setInstitution(inst.short);
+                        setFascicle(f);
+                        if (inst.defaultYear) setYear(inst.defaultYear);
+                      }}
                       className={`w-full flex items-center gap-1.5 pl-7 pr-2 py-1.5 text-xs text-left transition-colors
                         ${institution === inst.short && fascicle === f ? "bg-teal-600 text-white" : "text-gray-600 hover:bg-gray-50"}`}
                     >

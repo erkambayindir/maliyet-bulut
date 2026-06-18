@@ -39,7 +39,7 @@ Türkiye inşaat sektörü için **yaklaşık maliyet ve metraj hesaplama** plat
 - `src/components/layout/TopNav.tsx` — Ana sayfa üst menü çubuğu (Projeler, Benim Kitaplarım, Akıllı Panel, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al). Çoğu menü `YakindaPage` placeholder'ına gider.
 - `src/app/api/projects/[projectId]/export/route.ts` — Excel export (A4 dikey, dinamik satır yüksekliği).
 - `src/app/api/projects/[projectId]/export-word/route.ts` — Word export (ham OOXML, A4 dikey).
-- `scripts/*.py` — PDF'den poz import scriptleri (pdfplumber + psycopg2).
+- `scripts/*.py` — PDF'den poz import scriptleri (pdfplumber + psycopg2). `import_generic.py <pdf> <kurum> <fasikül> <yıl> [yerel|neon]` standart 4-kolon (POZ NO|TANIM|BİRİM|FİYAT) PDF'leri içe aktarır; `import_kgm.py` KGM'nin özel formatı için.
 
 ## Kritik Konvansiyonlar
 
@@ -51,13 +51,13 @@ Türkiye inşaat sektörü için **yaklaşık maliyet ve metraj hesaplama** plat
 
 ## Veri Durumu (Neon prod)
 
-ÇŞB poz kütüphanesi — toplam ~10.957 poz:
-- 2026-Mayıs / İnşaat: 1.598
-- 2026-Haziran / İnşaat: 5.985
-- 2026-Haziran / Elektrik: 1.828
-- 2026-Haziran / Mekanik Tesisat: 1.546
+Poz kütüphanesi — toplam ~16.510 poz, 4 kurum:
+- **ÇŞB** (10.957): 2026-Mayıs/İnşaat 1.598, 2026-Haziran/İnşaat 5.985, /Elektrik 1.828, /Mekanik Tesisat 1.546. Kaynak: `yfk.csb.gov.tr`.
+- **İller Bankası** (2.962): 2026-Haziran/Altyapı. Kaynak: `ilbank.gov.tr`.
+- **DSİ** (1.940): 2026-Ocak/İnşaat. Kaynak: `tarimorman` CDN.
+- **KGM** (651): 2026-Ocak/Yapım. Kaynak: `kgm.gov.tr`.
 
-Aylık güncellenir. Kaynak: ÇŞB Yüksek Fen Kurulu PDF'leri (`yfk.csb.gov.tr`).
+Aylık güncellenir. DLH/Kültür/MSB/Orman/PTT/TEDAŞ/Vakıflar ayrı dijital kitap yayınlamaz (placeholder).
 
 ## Deployment
 
