@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-06-18 — Veri izolasyonu sağlamlaştırma + sahipsiz projeler
+- Sorun: Neon'daki "Hhgg" ve "Demo Konut Projesi" sahipsiz (ownerId=null) kalmıştı (auth öncesi/erken deployment). Sahipsiz projeleri yalnızca admin görüyordu.
+- Her iki proje admin'e (erkam.bayindir@gmail.com) bağlandı (Neon + yerel UPDATE).
+- Ana sayfa sorgusu sağlamlaştırıldı: kullanıcı yoksa `[]` döner — `{ ownerId: undefined }` footgun'ı (Prisma'nın undefined filtreyi yok sayıp TÜM satırları döndürmesi) engellendi.
+- Doğrulama: normal kullanıcı (Bilal) ownerId filtresi nedeniyle admin projelerini görmez.
+
 ## 2026-06-18 — Kullanıcı sistemi & oturum (auth) eklendi
 - **Karar:** e-posta + şifre (bcrypt + jose JWT, httpOnly çerez). Admin = ADMIN_EMAIL ile kayıt olan (erkam.bayindir@gmail.com).
 - Şema: `User` modeli (email, passwordHash, name, role) + `Project.ownerId`. Migration `add_users_auth` yerel + Neon.
