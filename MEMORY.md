@@ -4,6 +4,13 @@
 
 ---
 
+## 2026-06-18 — Kullanıcı İşlemleri (audit log) eklendi
+- Prisma'ya `ActivityLog` modeli eklendi (denormalize: projectName, workGroupName, pozNo, action, userName, createdAt). Migration `add_activity_log` yerel + Neon'a uygulandı (Neon compute psql ile uyandırıldıktan sonra).
+- `src/lib/activity.ts` — `logActivity()` yardımcısı (hata olsa ana işlemi bozmaz, kullanıcı şimdilik sabit erkam.bayindir@gmail.com).
+- Poz API route'larına log eklendi: ekleme → "İş kalemi eklendi", PATCH → "Miktar değişti: X" / "Birim fiyat değişti: X", DELETE → "İş kalemi silindi".
+- `/api/activity` listeleme (arama destekli, son 500, yeni→eski).
+- `/kullanici-islemleri` OSKA tarzı tablo: İş Dosyası / İş Grubu / İş Kalemi / İşlem / Kullanıcı Adı / Zaman + arama kutusu.
+
 ## 2026-06-18 — Akıllı Panel (dashboard) eklendi
 - `recharts` kuruldu.
 - `/api/stats` endpoint'i: tüm ProjectPoz'ları çekip JS'de agregasyon yapar — poz kullanım sıklığı, parasal tutar, miktar; proje bazlı YM toplamı; bu yıl hazırlanan projeler.

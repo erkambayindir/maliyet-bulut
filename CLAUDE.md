@@ -29,7 +29,8 @@ Türkiye inşaat sektörü için **yaklaşık maliyet ve metraj hesaplama** plat
 - `src/lib/prisma.ts` — Ortam-duyarlı Prisma client. `neon.tech` URL'sinde WebSocket tabanlı `@prisma/adapter-neon`, yerelde `@prisma/adapter-pg` kullanır.
 - `src/lib/serialize.ts` — Prisma `Decimal`/`Date` nesnelerini client'a güvenli aktarmak için plain JS'e çevirir. **Tüm server→client veri aktarımında kullanılmalı.**
 - `src/lib/utils.ts` — `formatCurrency`, `formatNumber` (tr-TR locale), `calcMetrajQty`, `calcRebarKg`, demir ağırlık tablosu.
-- `prisma/schema.prisma` — 7 model: Project, WorkGroup (self-referencing WBS ağacı), PozLibrary, ProjectPoz, MetrajRow, DemirajRow, AnalysisItem.
+- `prisma/schema.prisma` — 8 model: Project, WorkGroup (self-referencing WBS ağacı), PozLibrary, ProjectPoz, MetrajRow, DemirajRow, AnalysisItem, ActivityLog (audit log, denormalize).
+- `src/lib/activity.ts` — `logActivity()`; poz ekle/değiştir/sil işlemleri buradan kaydedilir, Kullanıcı İşlemleri sayfasında listelenir.
 - `src/app/projeler/[projectId]/ym-cetveli/` — Ana ekran: sol İş Grupları paneli + sağ poz tablosu. Inline hücre düzenleme + optimistic update.
 - `src/components/modals/PozEkleModal.tsx` — Kurum/fasikül ağacı + sayfalı poz arama.
 - `src/components/layout/TopNav.tsx` — Ana sayfa üst menü çubuğu (Projeler, Benim Kitaplarım, Akıllı Panel, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al). Çoğu menü `YakindaPage` placeholder'ına gider.
@@ -81,6 +82,6 @@ Aylık güncellenir. Kaynak: ÇŞB Yüksek Fen Kurulu PDF'leri (`yfk.csb.gov.tr`
 - Analizler (alt bileşen kırılımı)
 - İş Grupları yönetim ekranı (ekle/sil/düzenle UI)
 - Projenin Bilgileri ekranı
-- Üst menü içerikleri (Benim Kitaplarım, Kullanıcı İşlemleri, Birim Fiyatlar, Yardım, Satın Al) — şu an `YakindaPage` placeholder (Akıllı Panel TAMAMLANDI)
+- Üst menü içerikleri (Benim Kitaplarım, Birim Fiyatlar, Yardım, Satın Al) — şu an `YakindaPage` placeholder (Akıllı Panel + Kullanıcı İşlemleri TAMAMLANDI)
 - Ana sayfa Arşiv / Çöp Kutusu işlevleri (buton var, işlev yok)
 - Kimlik doğrulama / çok kullanıcılı yapı

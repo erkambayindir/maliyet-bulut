@@ -105,3 +105,17 @@ model AnalysisItem {
   unit           String
   order          Int        @default(0)
 }
+
+// Kullanıcı işlem geçmişi (audit log) — denormalize edilmiş ki kayıt silinse bile log kalır
+model ActivityLog {
+  id            String   @id @default(uuid())
+  projectId     String?
+  projectName   String
+  workGroupName String?
+  pozNo         String?
+  action        String   // örn: "İş kalemi eklendi", "Miktar değişti: 79", "İş kalemi silindi"
+  userName      String
+  createdAt     DateTime @default(now())
+
+  @@index([createdAt])
+}

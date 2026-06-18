@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { serialize } from "@/lib/serialize";
+import { logActivity } from "@/lib/activity";
 
 const addSchema = z.object({
   pozNo: z.string(),
@@ -30,6 +31,19 @@ export async function POST(
       order: data.order ?? 0,
       workGroupId: data.workGroupId,
     },
+  });
+
+  // İşlem geçmişine kaydet
+  const wg = await prisma.workGroup.findUnique({
+    where: { id: data.workGroupId },
+    select: { name: true, project: { select: { id: true, name: true } } },
+  });
+  await logActivity({
+    projectId: wg?.project.id,
+    projectName: wg?.project.name ?? "—",
+    workGroupName: wg?.name,
+    pozNo: data.pozNo,
+    action: "İş kalemi eklendi",
   });
 
   return NextResponse.json(serialize(poz), { status: 201 });
