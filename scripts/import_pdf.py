@@ -10,7 +10,8 @@ import os
 import sys
 
 PDF_PATH = r"C:\Users\ff\Downloads\Cevre Sehircilik Bakanlıgı Birim Fiyatları.pdf"
-DATABASE_URL = "postgresql://postgres:!Postgrenopass1@localhost:5432/maliyet_bulut"
+from db_config import get_db
+DATABASE_URL = get_db("yerel")
 
 YEAR = "2026-Mayıs"
 INSTITUTION = "ÇŞB"

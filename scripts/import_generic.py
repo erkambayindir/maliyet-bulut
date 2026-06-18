@@ -4,11 +4,7 @@ Kullanım: python scripts/import_generic.py <pdf> <institution> <fascicle> <year
 Örn:     python scripts/import_generic.py dsi.pdf DSİ İnşaat 2026-Ocak yerel neon
 """
 import pdfplumber, psycopg2, re, uuid, sys
-
-DBS = {
-    "yerel": "postgresql://postgres:!Postgrenopass1@localhost:5432/maliyet_bulut",
-    "neon": "postgresql://neondb_owner:npg_unWtQ15NcdSm@ep-old-boat-atnrimef-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require",
-}
+from db_config import DBS
 
 def clean(s):
     return str(s or "").replace("\n", " ").strip()

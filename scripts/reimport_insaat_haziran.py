@@ -5,7 +5,8 @@ Sadece İnşaat fasiküldeki 422 poz silinip yerine 1598 poz yazılır.
 import pdfplumber, psycopg2, re, uuid
 
 PDF_PATH    = r"C:\Users\ff\Downloads\Cevre Sehircilik Bakanlıgı Birim Fiyatları.pdf"
-DB_URL      = "postgresql://postgres:!Postgrenopass1@localhost:5432/maliyet_bulut"
+from db_config import get_db
+DB_URL      = get_db("yerel")
 YEAR        = "2026-Haziran"
 INSTITUTION = "ÇŞB"
 FASCICLE    = "İnşaat"

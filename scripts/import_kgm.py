@@ -4,16 +4,12 @@ Format: POZ NO | İŞİN ADI | ÖLÇÜ BİRİMİ | İHALELİ BİRİM FİYATI (bo
 Hem yerel hem Neon'a yazar.
 """
 import pdfplumber, psycopg2, re, uuid, sys
+from db_config import DBS
 
 PDF_PATH = r"C:\Users\ff\Downloads\kurumlar\kgm_birim_fiyat.pdf"
 YEAR = "2026-Ocak"
 INSTITUTION = "KGM"
 FASCICLE = "Yapım"
-
-DBS = {
-    "yerel": "postgresql://postgres:!Postgrenopass1@localhost:5432/maliyet_bulut",
-    "neon": "postgresql://neondb_owner:npg_unWtQ15NcdSm@ep-old-boat-atnrimef-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require",
-}
 
 def clean_price(s):
     if not s: return None

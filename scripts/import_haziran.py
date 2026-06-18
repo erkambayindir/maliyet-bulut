@@ -6,7 +6,8 @@ import psycopg2
 import re
 import uuid
 
-DATABASE_URL = "postgresql://postgres:!Postgrenopass1@localhost:5432/maliyet_bulut"
+from db_config import get_db
+DATABASE_URL = get_db("yerel")
 YEAR = "2026-Haziran"
 INSTITUTION = "ÇŞB"
 
